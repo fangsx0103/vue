@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.global.js"></script>
+		<link rel="stylesheet" href="./bootstrap.min.css">
+		<style>
+			ul,
+			li {
+				list-style: none;
+			}
+
+			.addr {
+				height: 135px;
+				border: 2px solid #CCCCCC;
+				padding: 15px;
+			}
+
+			.addr:hover,.addr.active {
+				border-color: #f90;
+				cursor: pointer;
+			}
+
+			.addr h4 {
+				font-size: 16px;
+				margin-bottom: 15px;
+			}
+
+			.addr-opration a {
+				color: #f90;
+			}
+
+			.check {
+				border-color: #f90;
+			}
+
+			.addr-add-btn {
+				color: #ccc;
+				text-decoration: none;
+				font-size: 40px;
+			}
+
+			.addr-add-btn:hover {
+				color: #f90;
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container" id="app">
+			<ul class="row w-100 addr-list">
+				<li v-for="(list,idx) in addressList" class="col-3 mt-4">
+					<div class="addr" @click="currentIndex=idx" :class="{active:currentIndex==idx}">
+						<h4 class="name">{{list.name}}</h4>
+						<div class="address">{{list.address}}</div>
+						<div class="phone">{{list.phone}}</div>
+						<!--  条件渲染  -->
+						<div class="addr-opration addr-default" v-if="list.isDefault">默认地址</div>
+						<div class="addr-opration addr-set-default" v-else>
+							<a href　="javascript:;" class="addr-set-default-btn" @click.prevent="iDefault(idx)">设为默认</a>
+						</div>
+					</div>
+				</li>
+				<li class="col-3 mt-4">
+					<div class="addr d-flex justify-content-center align-items-center">
+						<a href="" class="addr-add-btn">+</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<script>
+			Vue.createApp({
+				data() {
+					return{
+						currentIndex: 0,
+							addressList: [{
+									id: 1,
+									name: '丁一一',
+									address: '浙江省温州市鹿城区大马路',
+									phone: '13777778888',
+									isDefault: 1
+								},
+								{
+									id: 2,
+									name: '王二二',
+									address: '浙江省宁波市鄞州区小马路',
+									phone: '13555550000',
+									isDefault: 0
+						
+								},
+								{
+									id: 3,
+									name: '马三三',
+									address: '浙江省绍兴市越城区山阴路',
+									phone: '13777778888',
+									isDefault: 0
+								}
+							]
+					}
+				},
+				methods:{
+					iDefault(i){
+						this.addressList.forEach(item => item.isDefault=0)
+						this.addressList[i].isDefault = 1
+					}
+				}
+			}).mount('#app')
+		</script>
+	</body>
+</html>

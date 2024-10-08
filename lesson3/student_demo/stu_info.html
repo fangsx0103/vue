@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.global.js"></script>
+		<link rel="stylesheet" href="../style/bootstrap.min.css">
+	</head>
+	<body>
+		<div id="app" class='container'>
+			<table class='table table-bordered text-center'>
+				<thead>
+					<tr>
+						<th class="text-center">学号</th>
+						<th class="text-center">姓名</th>
+						<th class="text-center">年龄</th>
+						<th class="text-center">性别</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{stu_list[0].stu_num}}</td>
+						<td>{{stu_list[0].name}}</td>
+						<td>{{stu_list[0].age}}</td>
+						<td>{{stu_list[0].sex?'男':'女'}}</td>
+					</tr>
+					<tr>
+						<td>{{stu_list[1].stu_num}}</td>
+						<td>{{stu_list[1].name}}</td>
+						<td v-once>{{stu_list[1].age}}</td>
+						<td v-pre>{{stu_list[1].sex?'男':'女'}}</td>
+					</tr>
+					<tr>
+						<!-- 
+							js表达式在标签属性中使用指令
+							内置指令：v-开头="属性值"
+							v-text、{{}} ：文本渲染
+							v-html	渲染html内容
+							v-once	数据只会渲染一次
+							v-pre：跳过编译
+						-->
+						<td v-text="stu_list[2].stu_num"></td>
+						<td>{{link}}</td>
+						<td v-html="link"></td>
+						<td><img v-bind:src="face" alt="" title="马三三"></td>
+					</tr>
+					<tr>
+						<td colspan="4">年龄总和：{{stu_list[0].age+stu_list[1].age+stu_list[2].age}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<script>
+			Vue.createApp({
+				data() {
+					return{
+						stu_list:[
+							{stu_num: 1810101,name: '丁一一',age: 19,sex: 1},
+							{stu_num: 1810102,name: '王二二',age: 20,sex: 0},
+							{stu_num: 1810103,name: '马三三',age: 20,sex: 1}
+						],
+						link:"<a href='1.demo.html'>demo1</a>",
+						face:'../images/1.jpg'
+					}
+				}
+			}).mount('#app')
+		</script>
+	</body>
+</html>
