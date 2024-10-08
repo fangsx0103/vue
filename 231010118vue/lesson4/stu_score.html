@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.global.js"></script>
+		<link rel="stylesheet" href="js/bootstrap.min.css">
+		<style>
+			td.hege{
+				color: green;
+			}
+			td.nohege{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class='container'>
+		    <table class='table table-bordered text-center'>
+		        <thead>
+		        <tr>
+		            <th class="text-center">学号</th>
+		            <th class="text-center">姓名</th>
+					<th class="text-center">头像</th>
+		            <th class="text-center">数学</th>
+		            <th class="text-center">语文</th>
+		        </tr>
+		        </thead>
+		        <tbody>
+		        <tr v-for="item in stu_scores">
+		            <td>{{item.stu_num}}</td>
+		            <td>{{item.name}}</td>
+		            <td><img v-bind:src="item.avatar"></td>
+		            <td :class="item.yscore>60?'hege':'nohege'">{{item.yscore}}</td>
+		            <td :class="item.sscore>60?'hege':'nohege'">{{item.sscore}}</td>
+		        </tr>
+		        <!-- <tr>
+		            <td>第二个学生学号</td>
+		            <td>第二个学生姓名</td>
+		            <td>第二个学生头像</td>
+		            <td>第二个学生数学成绩</td>
+		            <td>第二个学生语文成绩</td>
+		        </tr>
+		        <tr>
+		            <td>第三个学生学号</td>
+		            <td>第三个学生姓名</td>
+		            <td>第三个学生头像</td>
+		            <td>第三个学生数学成绩</td>
+		            <td>第三个学生语文成绩</td>
+		        </tr> -->
+		        </tbody>
+		    </table>
+		</div>
+		<script>
+			Vue.createApp({
+				data() {
+					return{
+						 stu_scores: [
+						 {stu_num: 1910101, name: '丁一一', yscore: 54,sscore: 54,avatar:'images/1.jpg'},
+						 {stu_num: 1910102, name: '王二二', yscore: 78,sscore: 64,avatar:'images/2.jpg'},
+						 {stu_num: 1910103, name: '马三三', yscore: 88,sscore: 74,avatar:'images/3.jpg'}
+						]
+					}
+				}
+			}).mount('.container')
+		</script>
+	</body>
+</html>
