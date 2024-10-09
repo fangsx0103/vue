@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>选修课程管理</title>
+		<script src="js/vue.global.js"></script>
+		<!-- <style>
+			.container button{
+				background-color: orange;
+				border: 0;
+				border-radius: 5px;
+			}
+		</style> -->
+		<link rel="stylesheet" href="bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container" id="app">
+			<h1>本学期的选修课列表</h1>
+			<table border="1" class="table table-striped">
+				<tr>
+					<th>选择</th>
+					<th>编号</th>
+					<th>名称</th>
+					<th>开设的分院</th>
+					<th>选修人数</th>
+					<th>操作</th>
+				</tr>
+				<!-- <tr>
+					<td>
+						<input type="checkbox">
+					</td>
+					<td>1</td>
+					<td>英语</td>
+					<td>范蠡</td>
+					<td>45</td>
+					<td><button>删除</button></td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox">
+					</td>
+					<td>2</td>
+					<td>摄影</td>
+					<td>信息</td>
+					<td>95</td>
+					<td><button>删除</button></td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox">
+					</td>
+					<td>3</td>
+					<td>尤里克克</td>
+					<td>阳明</td>
+					<td>95</td>
+					<td><button>删除</button></td>
+				</tr> -->
+				<tr v-for="(course,idx) in list">
+					<td><input type="checkbox" :value="course.id"></td>
+					<td>{{course.id}}</td>
+					<td>{{course.name}}</td>
+					<td>{{course.xueyuan}}</td>
+					<td>{{course.number}}</td>
+					<td><button @click="del(idx)" class="btn btn-warning">删除</button></td>
+				</tr>
+			</table>
+			<form>
+			  <div class="form-group">
+			    <label for="coursename">课程名称</label>
+			    <input type="text" class="form-control" v-model="name" id="coursename">
+			    
+			  </div>
+			  <div class="form-group">
+			    <label for="coursename">开设学院</label>
+			    <input type="text" class="form-control" id="coursexueyuan">
+			  </div>
+			  <div class="form-group">
+			    <label for="coursename">选课人数</label>
+			    <input type="text" class="form-control" id="coursenum">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+		<script>
+			Vue.createApp({
+				data() {
+					return{
+						list:[
+							{id:1,name:'AI前言',xueyuan:'信息工程',number:35},
+							{id:2,name:'尤里克克',xueyuan:'阳明',number:45},
+							{id:3,name:'摄影',xueyuan:'建艺学院',number:55},
+							{id:4,name:'我要创业',xueyuan:'范蠡商学院',number:65}
+						],
+						name:""
+					}
+				},
+				methods:{
+					del(idx){
+						this.list.splice(idx,1)
+					}
+					add(idx){
+						this.list.push()
+					}
+				}
+			}).mount('#app')
+		</script>
+	</body>
+</html>
